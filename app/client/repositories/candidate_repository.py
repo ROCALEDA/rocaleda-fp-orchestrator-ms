@@ -17,4 +17,6 @@ class CandidateRepository:
                 raise HTTPException(
                     status_code=response.status_code, detail=error_detail
                 )
-            return response.json()
+            payload = response.json()
+            print("Response payload: " + str(payload))
+            return CandidatesResponse.model_validate(payload)

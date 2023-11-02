@@ -33,3 +33,9 @@ class CandidateData(BaseModel):
 class CandidatesResponse(BaseModel):
     data: List[CandidateData]
     total_pages: int
+
+
+# Elemento base respuesta orquestación candidatos para posición
+class PositionCandidateDetail(BaseModel):
+    id: int
+    name: str

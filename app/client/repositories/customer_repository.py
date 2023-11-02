@@ -1,9 +1,11 @@
 import httpx
 from fastapi import HTTPException
+from pydantic import TypeAdapter
+from typing import List
+
 from app.client.dto.schemas import PositionCandidate
 from app.commons.helpers import build_request_uri
 from app.commons.settings import settings
-from typing import List
 
 
 class CustomerRepository:
@@ -22,4 +24,7 @@ class CustomerRepository:
                 raise HTTPException(
                     status_code=response.status_code, detail=error_detail
                 )
-            return response.json()
+            payload = response.json()
+            print("Response payload: " + str(payload))
+            list_adapter = TypeAdapter(List[PositionCandidate])
+            return list_adapter.validate_python(payload)
