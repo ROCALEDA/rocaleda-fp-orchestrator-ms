@@ -3,8 +3,6 @@ from unittest.mock import Mock, AsyncMock
 
 from app.position.controllers import position_controller
 
-# from app.database.schemas import ProjectCreation
-
 
 class TestPositionController:
     @pytest.mark.asyncio

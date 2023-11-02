@@ -88,14 +88,15 @@ class TestCustomerService:
 
         with pytest.raises(HTTPException):
             await service.get_position_candidates_details(position_id)
-        
 
     @pytest.mark.asyncio
     async def test_get_position_candidates_details_general_exception(self):
         mocked_candidate_repository = Mock()
         mocked_customer_repository = Mock()
         mocked_customer_repository.get_position_candidates = AsyncMock()
-        mocked_customer_repository.get_position_candidates.side_effect = Exception("Some error")
+        mocked_customer_repository.get_position_candidates.side_effect = Exception(
+            "Some error"
+        )
 
         position_id = -1
 
@@ -106,4 +107,3 @@ class TestCustomerService:
 
         with pytest.raises(HTTPException):
             await service.get_position_candidates_details(position_id)
-    
