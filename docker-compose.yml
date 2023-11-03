@@ -1,8 +1,12 @@
 version: '3.8'
 
 services:
-  api-gateway:
+  orchestrator:
     build: .
     ports:
-      - "8000:8000"
+      - "8005:8000"
+    environment:
+      - CANDIDATES_MS=localhost:8002
+      - CUSTOMERS_MS=localhost:8003
+
 
