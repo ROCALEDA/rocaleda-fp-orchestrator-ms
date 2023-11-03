@@ -9,4 +9,4 @@ class TestHelpers:
         host = "fakehost.net"
         endpoint = "this/endpoint"
         test_uri = build_request_uri(host, endpoint)
-        assert test_uri == "http://fakehost.net/this/endpoint"
+        assert test_uri == "https://fakehost.net/this/endpoint"
