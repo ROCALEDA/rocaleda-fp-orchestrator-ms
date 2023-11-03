@@ -1,0 +1,6 @@
+[run]
+omit =
+    schemas.py
+    candidate_repository.py
+    customer_repository.py
+ 
