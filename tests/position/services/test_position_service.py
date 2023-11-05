@@ -67,7 +67,7 @@ class TestCustomerService:
             mock_candidate_ids
         )
         assert len(response) == 2
-        assert response[0]["id"] == 1
+        assert response[0]["user_id"] == 1
         assert response[0]["fullname"] == "Candidate A"
 
     @pytest.mark.asyncio

@@ -37,5 +37,7 @@ class CandidatesResponse(BaseModel):
 
 # Elemento base respuesta orquestación candidatos para posición
 class PositionCandidateDetail(BaseModel):
-    id: int
-    name: str
+    user_id: int
+    fullname: str
+    soft_skills: List[SoftSkillData]
+    tech_skills: List[TechSkillData]
