@@ -36,7 +36,12 @@ class PositionService:
             position_candidates = []
             for candidate_data in candidates_details.data:
                 position_candidates.append(
-                    {"id": candidate_data.user_id, "name": candidate_data.fullname}
+                    {
+                        "id": candidate_data.user_id,
+                        "fullname": candidate_data.fullname,
+                        "tech_skills": candidate_data.tech_skills,
+                        "soft_skills": candidate_data.soft_skills,
+                    }
                 )
             return position_candidates
 
