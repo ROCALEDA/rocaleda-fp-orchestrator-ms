@@ -11,8 +11,8 @@ class TestPositionController:
         mocked_service.get_position_candidates_details = AsyncMock()
 
         pos_candidates_data = [
-            {"id": 1, "name": "Candidate A"},
-            {"id": 2, "name": "Candidate B"},
+            {"id": 1, "fullname": "Candidate A"},
+            {"id": 2, "fullname": "Candidate B"},
         ]
         mocked_service.get_position_candidates_details.return_value = (
             pos_candidates_data

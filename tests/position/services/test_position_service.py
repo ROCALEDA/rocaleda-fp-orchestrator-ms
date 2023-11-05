@@ -68,7 +68,7 @@ class TestCustomerService:
         )
         assert len(response) == 2
         assert response[0]["id"] == 1
-        assert response[0]["name"] == "Candidate A"
+        assert response[0]["fullname"] == "Candidate A"
 
     @pytest.mark.asyncio
     async def test_get_position_candidates_details_http_exception(self):
