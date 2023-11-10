@@ -69,6 +69,28 @@ class TestCustomerService:
         assert len(response) == 2
         assert response[0]["user_id"] == 1
         assert response[0]["fullname"] == "Candidate A"
+    
+    @pytest.mark.asyncio
+    async def test_get_position_candidates_no_candidates(self):
+        mocked_candidate_repository = Mock()
+        mocked_customer_repository = Mock()
+
+        mocked_customer_repository.get_position_candidates = AsyncMock()
+        mocked_customer_repository.get_position_candidates.return_value = []
+
+        service = PositionService(
+            mocked_candidate_repository,
+            mocked_customer_repository,
+        )
+
+        position_id = 0
+
+        response = await service.get_position_candidates_details(position_id)
+
+        mocked_customer_repository.get_position_candidates.assert_called_once_with(
+            position_id
+        )
+        assert len(response) == 0
 
     @pytest.mark.asyncio
     async def test_get_position_candidates_details_http_exception(self):
