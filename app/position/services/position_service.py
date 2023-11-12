@@ -17,6 +17,34 @@ class PositionService:
         self.customer_repository = customer_repository
         self.candidate_repository = candidate_repository
 
+    async def get_closed_positions_with_candidate(self, project_id: int):
+        try:
+            positions = await self.customer_repository.get_closed_positions(project_id)
+
+            positions = [
+                {
+                    "position_id": position["id"],
+                    "position_name": position["position_name"],
+                    "candidate_id": position["candidate_id"],
+                    "candidate_name": (
+                        await self.candidate_repository.get_candidates_paginated(
+                            {"ids": f"{position['candidate_id']}"}
+                        )
+                    )
+                    .data[0]
+                    .fullname,
+                }
+                for position in positions
+            ]
+            print("ACA AL FINAL")
+            return positions
+        except HTTPException as e:
+            print("Http exception: ", e.detail)
+            raise e
+        except Exception as e:
+            print("Internal server error: ", e)
+            raise HTTPException(500, "Internal server error")
+
     async def get_position_candidates_details(
         self, position_id: int
     ) -> List[PositionCandidateDetail]:
