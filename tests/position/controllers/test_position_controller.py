@@ -30,3 +30,15 @@ class TestPositionController:
             position_id
         )
         assert func_response == pos_candidates_data
+
+    @pytest.mark.asyncio
+    async def test_get_closed_positions_with_candidate(self):
+        mocked_service = Mock()
+        mocked_service.get_closed_positions_with_candidate = AsyncMock()
+
+        get_closed_positions_with_candidate_func = position_controller.initialize(
+            mocked_service
+        )["get_closed_positions_with_candidate"]
+
+        await get_closed_positions_with_candidate_func(1)
+        assert mocked_service.get_closed_positions_with_candidate.call_count == 1
