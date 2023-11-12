@@ -52,6 +52,7 @@ class PositionService:
             candidates_list = await self.customer_repository.get_position_candidates(
                 position_id
             )
+            print(candidates_list)
             if not candidates_list:
                 return []
             query_ids = []
