@@ -6,7 +6,7 @@ from app.commons.settings import settings
 
 
 class CandidateRepository:
-    async def get_candidates_paginated(self, query_params):
+    async def get_candidates_paginated(self, query_params) -> CandidatesResponse:
         async with httpx.AsyncClient() as client:
             uri = build_request_uri(settings.candidates_ms, "candidates")
             print(f"Sending {query_params} to {uri}")
@@ -19,15 +19,14 @@ class CandidateRepository:
                 )
             payload = response.json()
             print("Response payload: " + str(payload))
-            # return CandidatesResponse.model_validate(payload)
-            return payload
+            return CandidatesResponse.model_validate(payload)
 
-    async def get_interviews_paginated(self, query_params, headers) -> InterviewsResponse:
+    async def get_interviews_paginated(
+        self, query_params, headers
+    ) -> InterviewsResponse:
         async with httpx.AsyncClient() as client:
             uri = build_request_uri(settings.candidates_ms, "interviews")
-            print(
-                f"Sending params {query_params} and headers {headers} to GET {uri}"
-            )
+            print(f"Sending params {query_params} and headers {headers} to GET {uri}")
             response = await client.get(
                 uri, params=query_params, headers=headers, timeout=60
             )
@@ -38,4 +37,4 @@ class CandidateRepository:
                 )
             payload = response.json()
             print("Response payload: " + str(payload))
-            return response.json()
+            return InterviewsResponse.model_validate(payload)

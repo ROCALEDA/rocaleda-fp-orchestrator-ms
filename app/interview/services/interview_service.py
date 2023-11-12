@@ -30,9 +30,8 @@ class InterviewService:
             if limit is not None:
                 reroute_params["limit"] = limit
             interviews_list = await self.candidate_repository.get_interviews_paginated(
-                reroute_params, reroute_headers 
+                reroute_params, reroute_headers
             )
-            print(interviews_list)
             if not interviews_list.data:
                 return []
             detailed_interviews = []
