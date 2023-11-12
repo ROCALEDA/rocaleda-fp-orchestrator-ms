@@ -1,3 +1,4 @@
+from datetime import datetime
 from typing import List, Optional
 from pydantic import BaseModel
 
@@ -41,3 +42,46 @@ class PositionCandidateDetail(BaseModel):
     fullname: str
     soft_skills: List[SoftSkillData]
     tech_skills: List[TechSkillData]
+
+# Item base de entrevista
+class InterviewBase(BaseModel):
+    customer_id: int
+    candidate_id: int
+    subject: str
+    realization_date: datetime
+    score: Optional[int]
+    open_position_id: Optional[int]
+
+
+# Item con datos de entrevista respuesta
+class InterviewResponseData(InterviewBase):
+    id: int
+
+
+# Respuesta servicio consulta de entrevistas
+class InterviewsResponse(BaseModel):
+    data: List[InterviewResponseData]
+    total_pages: int
+
+# Elemento base respuesta orquestación entrevistas
+class InterviewData(BaseModel):
+    subject: str
+    client_name: str
+    realization_date: datetime
+    score: Optional[int]
+
+# Elemento base cliente
+class CustomerBase(BaseModel):
+    user_id: int
+    name: str
+
+# Respuesta servicio consulta de detalle empresas cliente
+class CustomersResponse(BaseModel):
+    data: List[CustomerBase]
+    total_pages: int
+
+
+# Respuesta orquestación entrevistas
+class InterviewsDetailsResponse(BaseModel):
+    data: List[InterviewData]
+    total_pages: int
