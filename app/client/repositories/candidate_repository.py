@@ -19,7 +19,7 @@ class CandidateRepository:
                 )
             payload = response.json()
             print("Response payload: " + str(payload))
-            return CandidatesResponse.model_validate(payload)
+            return payload
 
     async def get_interviews_paginated(self, query_params, headers) -> InterviewsResponse:
         async with httpx.AsyncClient() as client:
@@ -35,4 +35,5 @@ class CandidateRepository:
                 raise HTTPException(
                     status_code=response.status_code, detail=error_detail
                 )
+            print("Response payload: " + str(payload))
             return response.json()
