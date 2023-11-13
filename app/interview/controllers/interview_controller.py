@@ -16,10 +16,10 @@ router = APIRouter(
 def initialize(interview_service: "InterviewService"):
     @router.get("")
     async def get_interviews_details(
-        role: int = Header(...),
-        user_id: int = Query(...),
-        page: int = Query(1),
-        limit: int = Query(10),
+        role: str = Header(...),
+        user_id: str = Query(...),
+        page: str = Query(1),
+        limit: str = Query(10),
     ) -> List[InterviewsDetailsResponse]:
         return await interview_service.get_interviews_details(
             role, user_id, page, limit
