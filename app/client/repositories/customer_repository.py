@@ -48,7 +48,7 @@ class CustomerRepository:
 
     async def get_customers(self, query_params) -> CustomersResponse:
         async with httpx.AsyncClient() as client:
-            uri = build_request_uri(settings.customers_ms, "interviews")
+            uri = build_request_uri(settings.customers_ms, "customers")
             print(f"Sending params {query_params} to GET {uri}")
             print(f"Sending params {query_params} to GET {uri}")
             response = await client.get(uri, params=query_params, timeout=60)
