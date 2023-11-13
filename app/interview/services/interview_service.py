@@ -19,7 +19,7 @@ class InterviewService:
 
     async def get_interviews_details(
         self, role: str, user_id: str, page: str, limit: str
-    ):
+    ) -> InterviewsDetailsResponse:
         try:
             reroute_headers = {"role": role}
             reroute_params = {

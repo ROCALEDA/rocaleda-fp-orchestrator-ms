@@ -20,7 +20,7 @@ def initialize(interview_service: "InterviewService"):
         user_id: str = Query(...),
         page: str = Query(1),
         limit: str = Query(10),
-    ) -> List[InterviewsDetailsResponse]:
+    ) -> InterviewsDetailsResponse:
         return await interview_service.get_interviews_details(
             role, user_id, page, limit
         )
