@@ -32,8 +32,12 @@ class InterviewService:
             interviews_list = await self.candidate_repository.get_interviews_paginated(
                 reroute_params, reroute_headers
             )
+            
             if not interviews_list.data:
-                return []
+                return {
+                    "data": [],
+                    "total_pages": 0
+                }
             detailed_interviews = []
             query_ids = []
             for interview in interviews_list.data:
