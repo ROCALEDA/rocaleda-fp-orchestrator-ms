@@ -95,7 +95,8 @@ class TestCustomerService:
         mocked_candidate_repository.get_interviews_paginated.assert_called_once_with(
             {"user_id": user_id, "page": page, "limit": limit}, {"role": role}
         )
-        assert len(response) == 0
+        assert response["total_pages"] == 0
+        assert response["data"] == []
 
     @pytest.mark.asyncio
     async def test_get_interviews_details_http_exception(self):
